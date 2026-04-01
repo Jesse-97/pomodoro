@@ -1,0 +1,42 @@
+.timer-container {
+  width: 420px;
+  margin: 40px auto;
+  padding: 30px;
+  text-align: center;
+}
+
+.session-label {
+  letter-spacing: 2px;
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.subtitle {
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.timer-circle {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 30px auto;
+}
+
+.time-text {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: var(--text-dark);
+}
+
+.controls button {
+  background: var(--primary);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+}
