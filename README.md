@@ -1,20 +1,53 @@
-<<<<<<< HEAD
-# React + Vite
+# Pomodoro Study Assistant
+Timer System
+* 25-minute focus sessions
+* 5-minute short breaks
+* 15-minute long breaks
+* Start, pause, and reset functionality
+* Circular progress indicator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Focus Environment
+* Background audio options:
+  * Soft classical music
+  * White noise
+  * Rain sounds
+  * Silence
+* Smooth transitions between sessions
 
-Currently, two official plugins are available:
+Break-Time Activities
+* Mini-games available only during break sessions
+* Designed to refresh attention and cognitive function
+* Examples include:
+  * Reaction-based clicking game
+  * Pattern memory game
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Task Management
+* Add and manage tasks
+* Assign tasks to focus sessions
+* Mark tasks as completed
 
-## React Compiler
+Analytics (Planned)
+* Track number of sessions completed
+* Record mood before sessions
+* Record productivity after sessions
+* Visual summaries and insights
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Tech Stack
+* React (Vite)
+* HTML5
+* CSS3
+* JavaScript (ES6+)
 
-## Expanding the ESLint configuration
+Project Objective
+The goal of this project is to create a productivity tool that integrates time management techniques with an engaging and visually appealing interface, encouraging consistent and focused study habits.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# pomodoro-study-assistant
->>>>>>> 19b890601236df0d92762119fd6be3766795c4ee
+Future Enhancements
+* AI-based study recommendations
+* Advanced analytics dashboard
+* Additional mini-games
+* User authentication and data persistence
+
+## Author
+Kathy Jane Leo
+
+This project is inspired by the Pomodoro Technique and modern productivity applications.

@@ -1,4 +1,4 @@
-function ProgressRing({ time, total }) {
+function ProgressRing({ time, total, color }) {
   const radius = 100;
   const stroke = 8;
   const normalizedRadius = radius - stroke * 2;
@@ -19,7 +19,7 @@ function ProgressRing({ time, total }) {
       />
 
       <circle
-        stroke="#8b5cf6"
+        stroke={color}
         fill="transparent"
         strokeWidth={stroke}
         strokeDasharray={circumference}
@@ -28,6 +28,7 @@ function ProgressRing({ time, total }) {
         r={normalizedRadius}
         cx={radius}
         cy={radius}
+        style={{ filter: `drop-shadow(0px 0px 6px ${color})` }}
       />
     </svg>
   );
