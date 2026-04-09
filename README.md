@@ -111,9 +111,3 @@ This structure supports a full cycle of deep work, intentional breaks, and simpl
 - Historical performance metrics for typing and games.
 - Optional cloud sync for tasks and preferences.
 - Expanded accessibility settings (font scaling, reduced motion options).
-
-## Author
-
-Kathy Jane Leo
-
-Inspired by the Pomodoro Technique and modern study-focused productivity workflows.
