@@ -8,9 +8,14 @@ function ProgressRing({ time, total, color }) {
   const strokeDashoffset = circumference - progress * circumference;
 
   return (
-    <svg height={radius * 2} width={radius * 2}>
+    <svg
+      viewBox={`0 0 ${radius * 2} ${radius * 2}`}
+      width="100%"
+      height="100%"
+      preserveAspectRatio="xMidYMid meet"
+    >
       <circle
-        stroke="#e5e7eb"
+        stroke="var(--ring-bg)"
         fill="transparent"
         strokeWidth={stroke}
         r={normalizedRadius}

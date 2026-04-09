@@ -1,28 +1,33 @@
 .mode-selector {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
 }
 
 .mode-selector button {
-  border: none;
-  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  padding: 9px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.4);
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
   backdrop-filter: blur(10px);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
   color: var(--text-dark);
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
 }
 
 .mode-selector button:hover {
-  transform: scale(1.05);
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--secondary) 50%, var(--border-color));
 }
 
 .mode-selector button.active {
   background: var(--primary);
   color: white;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  border-color: color-mix(in srgb, var(--primary-strong) 75%, transparent);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 35%, transparent);
 }

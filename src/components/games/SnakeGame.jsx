@@ -6,26 +6,6 @@ function SnakeGame() {
   const [direction, setDirection] = useState([0, 1]);
   const [running, setRunning] = useState(false);
 
-  const moveSnake = () => {
-    const newHead = [
-      snake[0][0] + direction[0],
-      snake[0][1] + direction[1],
-    ];
-
-    const newSnake = [newHead, ...snake];
-
-    if (newHead[0] === food[0] && newHead[1] === food[1]) {
-      setFood([
-        Math.floor(Math.random() * 15),
-        Math.floor(Math.random() * 15),
-      ]);
-    } else {
-      newSnake.pop();
-    }
-
-    setSnake(newSnake);
-  };
-
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === "ArrowUp") setDirection([-1, 0]);
@@ -42,11 +22,29 @@ function SnakeGame() {
     if (!running) return;
 
     const interval = setInterval(() => {
-      moveSnake();
+      setSnake((prevSnake) => {
+        const newHead = [
+          prevSnake[0][0] + direction[0],
+          prevSnake[0][1] + direction[1],
+        ];
+
+        const newSnake = [newHead, ...prevSnake];
+
+        if (newHead[0] === food[0] && newHead[1] === food[1]) {
+          setFood([
+            Math.floor(Math.random() * 15),
+            Math.floor(Math.random() * 15),
+          ]);
+        } else {
+          newSnake.pop();
+        }
+
+        return newSnake;
+      });
     }, 200);
 
     return () => clearInterval(interval);
-  }, [snake, direction, running]);
+  }, [direction, running, food]);
 
   const startGame = () => {
     setSnake([[5, 5]]);

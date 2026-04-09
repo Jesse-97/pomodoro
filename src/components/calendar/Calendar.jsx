@@ -194,7 +194,7 @@ export default function Calendar() {
                 day: "numeric",
               })}
             </h3>
-            {selectedDate.getTime() === today.getTime() && (
+            {isToday(selectedDate) && (
               <span className="today-badge">Today</span>
             )}
           </div>
@@ -204,7 +204,7 @@ export default function Calendar() {
               type="text"
               value={newTaskText}
               onChange={(e) => setNewTaskText(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleAddTask()}
+              onKeyDown={(e) => e.key === "Enter" && handleAddTask()}
               placeholder="Add a new task..."
               className="task-input"
             />

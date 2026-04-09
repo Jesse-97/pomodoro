@@ -10,7 +10,7 @@ import TimingGame from "./TimingGame";
 import FlappyBird from "./FlappyBird";
 import "./GameView.css";
 
-export default function GameView({ mode, setMode }) {
+export default function GameView({ mode, setMode, audioOption, setAudioOption }) {
   const [activeGame, setActiveGame] = useState(null);
 
   const renderGame = () => {
@@ -51,12 +51,17 @@ export default function GameView({ mode, setMode }) {
 
       {!activeGame ? (
         <div className="timer-centered">
-          <Timer mode={mode} setMode={setMode} />
+          <Timer
+            mode={mode}
+            setMode={setMode}
+            audioOption={audioOption}
+            setAudioOption={setAudioOption}
+          />
         </div>
       ) : (
         <div className="game-layout">
           <div className="timer-small">
-            <MiniTimer mode={mode} setMode={setMode} />
+            <MiniTimer mode={mode} />
           </div>
           <div className="game-container">
             {renderGame()}

@@ -10,74 +10,108 @@ const SENTENCES = [
   "The only way to do great work is to love what you do, or at least pretend you do until it starts growing on you"
 ];
 
+const pickSentence = () => SENTENCES[Math.floor(Math.random() * SENTENCES.length)];
+
 export default function TypingGame() {
-  const [target, setTarget] = useState("");
+  const [target, setTarget] = useState(() => pickSentence());
   const [input, setInput] = useState("");
   const [startTime, setStartTime] = useState(null);
-  const [wpm, setWpm] = useState(null);
-  const [accuracy, setAccuracy] = useState(null);
-  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [endTime, setEndTime] = useState(null);
+  const [clockNow, setClockNow] = useState(0);
   const inputRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(Date.now());
-    }, 100);
+      setClockNow(Date.now());
+    }, 120);
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  const finishTime = endTime ?? clockNow;
+  const elapsedSeconds = startTime ? Math.max(1, Math.floor((finishTime - startTime) / 1000)) : 0;
+  const compareLength = Math.min(input.length, target.length);
+
+  let correctChars = 0;
+  for (let i = 0; i < compareLength; i += 1) {
+    if (input[i] === target[i]) correctChars += 1;
+  }
+
+  const accuracy = input.length > 0 ? Math.round((correctChars / input.length) * 100) : 100;
+  const wpm = startTime ? Math.max(0, Math.round((correctChars / 5) / (elapsedSeconds / 60))) : 0;
+  const isFinished = endTime !== null;
+
   const newRound = () => {
-    setTarget(SENTENCES[Math.floor(Math.random() * SENTENCES.length)]);
+    setTarget(pickSentence());
     setInput("");
     setStartTime(null);
-    setWpm(null);
-    setAccuracy(null);
-    setTimeout(() => inputRef.current?.focus(), 100);
+    setEndTime(null);
+    setClockNow(Date.now());
+    requestAnimationFrame(() => inputRef.current?.focus());
   };
 
-  useEffect(() => { newRound(); }, []);
-
   const handleInput = (val) => {
+    if (isFinished) return;
+
     if (!startTime) setStartTime(Date.now());
-    setInput(val);
+    const limited = val.slice(0, target.length);
+    setInput(limited);
 
-    if (val.length >= target.length) {
-      const elapsed = (Date.now() - (startTime || Date.now())) / 1000 / 60;
-      const words = target.split(" ").length;
-      setWpm(Math.round(words / elapsed));
-
-      let correct = 0;
-      for (let i = 0; i < target.length; i++) {
-        if (val[i] === target[i]) correct++;
-      }
-      setAccuracy(Math.round((correct / target.length) * 100));
+    if (limited.length === target.length) {
+      setEndTime(Date.now());
     }
   };
 
-  return (
-    <div className="typing-game">
-      <p className="target-text">{target}</p>
+  const renderCharacter = (char, idx) => {
+    const typedChar = input[idx];
+    let className = "typing-char pending";
 
-      <textarea
+    if (typedChar !== undefined) {
+      className = typedChar === char ? "typing-char correct" : "typing-char incorrect";
+    } else if (idx === input.length) {
+      className = "typing-char current";
+    }
+
+    return (
+      <span key={`${char}-${idx}`} className={className}>
+        {char}
+      </span>
+    );
+  };
+
+  return (
+    <div className="typing-game monkeytype" onClick={() => inputRef.current?.focus()}>
+      <div className="typing-meta">
+        <p>Time {elapsedSeconds}s</p>
+        <p>WPM {wpm}</p>
+        <p>Accuracy {accuracy}%</p>
+      </div>
+
+      <p className="typing-prompt">Type the line below as fast and accurately as you can.</p>
+
+      <div className="typing-text" aria-live="polite">
+        {target.split("").map(renderCharacter)}
+      </div>
+
+      <input
         ref={inputRef}
+        className="typing-input"
         value={input}
         onChange={(e) => handleInput(e.target.value)}
-        disabled={wpm !== null}
-        placeholder="Start typing..."
+        disabled={isFinished}
+        autoCapitalize="off"
+        autoCorrect="off"
+        autoComplete="off"
+        spellCheck={false}
+        placeholder={isFinished ? "Round complete" : "Start typing..."}
       />
 
-      <p>Time: {startTime ? Math.floor((currentTime - startTime) / 1000) : 0}s</p>
-
-      <button onClick={newRound}>
-        {wpm !== null ? "Try Again" : "Start"}
-      </button>
-
-      {wpm !== null && (
-        <div className="result">
-          <p>WPM: {wpm}</p>
-          <p>Accuracy: {accuracy}%</p>
-        </div>
-      )}
+      <div className="typing-actions">
+        <button onClick={newRound}>{isFinished ? "Restart" : "Reset"}</button>
+      </div>
     </div>
   );
 }

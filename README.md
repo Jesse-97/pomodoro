@@ -1,103 +1,119 @@
 # Pomodoro Study Assistant
-<<<<<<< HEAD
-Timer System
-* 25-minute focus sessions
-* 5-minute short breaks
-* 15-minute long breaks
-* Start, pause, and reset functionality
-* Circular progress indicator
 
-Focus Environment
-* Background audio options:
-  * Soft classical music
-  * White noise
-  * Rain sounds
-  * Silence
-* Smooth transitions between sessions
+Pomodoro Study Assistant is a productivity-focused web app that blends structured focus sessions, break-time mini games, and lightweight planning tools in a single interface. It is designed to reduce context switching during study sessions by keeping timer control, ambient audio, and break activities in one flow.
 
-Break-Time Activities
-* Mini-games available only during break sessions
-* Designed to refresh attention and cognitive function
-* Examples include:
-  * Reaction-based clicking game
-  * Pattern memory game
+## Product Overview
 
-Task Management
-* Add and manage tasks
-* Assign tasks to focus sessions
-* Mark tasks as completed
+The app is built around three core views:
 
-Analytics (Planned)
-* Track number of sessions completed
-* Record mood before sessions
-* Record productivity after sessions
-* Visual summaries and insights
+- Focus: A configurable Pomodoro timer with immersive mode.
+- Games: Break-only mini games that remain locked during focus sessions.
+- Calendar: A month view with per-day task tracking and completion heatmap.
 
-Tech Stack
-* React (Vite)
-* HTML5
-* CSS3
-* JavaScript (ES6+)
+This structure supports a full cycle of deep work, intentional breaks, and simple daily planning.
 
-Project Objective
-The goal of this project is to create a productivity tool that integrates time management techniques with an engaging and visually appealing interface, encouraging consistent and focused study habits.
+## Core Features
 
-=======
+### Timer and Session Modes
 
-A Pomodoro-based productivity web application designed to help users stay focused, manage tasks, and take effective breaks. The application combines a structured timer system with a clean pastel-themed interface and interactive features to enhance the study experience.
+- Preset session durations:
+  - Focus: 25 minutes
+  - Short Break: 5 minutes
+  - Long Break: 15 minutes
+- Circular progress ring with mode-specific colors.
+- Start behavior enters immersive fullscreen timer mode.
+- Immersive mode intentionally strips UI down to timer and Stop action.
+- Stop exits immersive mode and returns to the standard timer screen.
 
-## Features
+### Ambient Background Audio
 
-Timer System
-* 25-minute focus sessions
-* 5-minute short breaks
-* 15-minute long breaks
-* Start, pause, and reset functionality
-* Circular progress indicator
+- Built-in audio options:
+  - Soft Classical Music
+  - White Noise
+  - Rain Sounds
+  - Silence
+- Smooth audio transitions between session mode changes.
+- Option persistence across refreshes via local storage.
 
-Focus Environment
-* Background audio options:
-  * Soft classical music
-  * White noise
-  * Rain sounds
-  * Silence
-* Smooth transitions between sessions
+### Break-Time Game Suite
 
-Break-Time Activities
-* Mini-games available only during break sessions
-* Designed to refresh attention and cognitive function
-* Examples include:
-  * Reaction-based clicking game
-  * Pattern memory game
+- Game access is locked while in focus mode.
+- Available games:
+  - Typing (monkeytype-style character feedback)
+  - Whack-A-Mole
+  - Memory
+  - Snake
+  - Timing
+  - Flappy Bird
+- Compact mini timer remains visible while a game is active.
 
-Task Management
-* Add and manage tasks
-* Assign tasks to focus sessions
-* Mark tasks as completed
+### Calendar and Task Tracking
 
-Analytics (Planned)
-* Track number of sessions completed
-* Record mood before sessions
-* Record productivity after sessions
-* Visual summaries and insights
+- Interactive monthly calendar with day selection.
+- Per-day task list with add, complete, and delete actions.
+- Completion percentage heatmap on each calendar day.
+- Task data persists in browser local storage.
 
-Tech Stack
-* React (Vite)
-* HTML5
-* CSS3
-* JavaScript (ES6+)
+### Theme and UX
 
-Project Objective
-The goal of this project is to create a productivity tool that integrates time management techniques with an engaging and visually appealing interface, encouraging consistent and focused study habits.
+- Persistent Light/Dark theme toggle.
+- Token-based styling system for cohesive visual theming.
+- Responsive layout across desktop and mobile.
+- Motion-enhanced transitions for focus-state changes.
 
->>>>>>> 3c4f1194056ffa753913587821668cb005ff0623
-Future Enhancements
-* AI-based study recommendations
-* Advanced analytics dashboard
-* Additional mini-games
-* User authentication and data persistence
+## Technical Stack
+
+- Frontend Framework: React 19
+- Build Tooling: Vite 8
+- Language: JavaScript (ES Modules)
+- Styling: CSS with design tokens and component-scoped styles
+- Linting: ESLint with React Hooks rules
+- Browser APIs:
+  - Web Audio API (procedural ambient sound engine)
+  - Local Storage (theme, audio preference, calendar tasks)
+
+## Architecture Summary
+
+### Application Composition
+
+- App-level state manages:
+  - Active tab (Focus, Games, Calendar)
+  - Session mode (focus, short, long)
+  - Theme preference
+  - Global background audio preference
+- Timer logic is encapsulated in a reusable timer hook.
+- Background audio is handled by a shared audio engine hook.
+
+### Major Modules
+
+- Timer module:
+  - Standard timer card UI
+  - Immersive fullscreen timer state
+  - Progress ring rendering
+- Games module:
+  - Game navbar and lock behavior
+  - Game container orchestration
+  - Individual mini game implementations
+- Calendar module:
+  - Month generation and date selection
+  - Task CRUD and completion metrics
+
+## Design Goals
+
+- Keep user attention on one action at a time.
+- Make session state obvious at a glance.
+- Support recovery and continuity with persistent preferences.
+- Keep feature complexity moderate while preserving a playful break experience.
+
+## Future Direction
+
+- Session analytics and trend reporting.
+- Historical performance metrics for typing and games.
+- Optional cloud sync for tasks and preferences.
+- Expanded accessibility settings (font scaling, reduced motion options).
 
 ## Author
+
 Kathy Jane Leo
 
-This project is inspired by the Pomodoro Technique and modern productivity applications.
+Inspired by the Pomodoro Technique and modern study-focused productivity workflows.

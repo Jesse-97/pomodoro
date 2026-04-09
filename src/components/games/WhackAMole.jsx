@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const GRID = 16;
 
@@ -10,15 +10,7 @@ export default function WhackAMole() {
   const [hitCell, setHitCell] = useState(null);
   const timerRef = useRef(null);
   const moleRef = useRef(null);
-
-  const spawnMole = useCallback(() => {
-    const idx = Math.floor(Math.random() * GRID);
-    setActiveMole(idx);
-    moleRef.current = setTimeout(() => {
-      setActiveMole(null);
-      if (gameActive) spawnMole();
-    }, 700 + Math.random() * 600);
-  }, [gameActive]);
+  const spawnRef = useRef(null);
 
   const startGame = () => {
     setScore(0);
@@ -28,7 +20,18 @@ export default function WhackAMole() {
 
   useEffect(() => {
     if (gameActive) {
-      spawnMole();
+      const spawn = () => {
+        const idx = Math.floor(Math.random() * GRID);
+        setActiveMole(idx);
+        moleRef.current = setTimeout(() => {
+          setActiveMole(null);
+          spawn();
+        }, 700 + Math.random() * 600);
+      };
+
+      spawnRef.current = spawn;
+      spawn();
+
       timerRef.current = setInterval(() => {
         setTimeLeft((t) => {
           if (t <= 1) {
@@ -41,10 +44,11 @@ export default function WhackAMole() {
       }, 1000);
     }
     return () => {
+      spawnRef.current = null;
       if (timerRef.current) clearInterval(timerRef.current);
       if (moleRef.current) clearTimeout(moleRef.current);
     };
-  }, [gameActive, spawnMole]);
+  }, [gameActive]);
 
   const whack = (idx) => {
     if (idx !== activeMole) return;
@@ -54,7 +58,9 @@ export default function WhackAMole() {
     if (moleRef.current) clearTimeout(moleRef.current);
     setTimeout(() => {
       setHitCell(null);
-      if (gameActive) spawnMole();
+      if (gameActive && spawnRef.current) {
+        spawnRef.current();
+      }
     }, 150);
   };
 

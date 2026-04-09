@@ -1,12 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "./variables.css";
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  font-family: var(--font-body);
   background: var(--bg-gradient);
+  background-color: var(--bg-base);
+  transition: background 0.45s ease, color 0.3s ease;
 }
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(40px);
+  opacity: 0.6;
+}
+
+body::before {
+  width: 320px;
+  height: 320px;
+  top: 5vh;
+  left: -80px;
+  background: color-mix(in srgb, var(--primary) 46%, transparent);
+}
+
+body::after {
+  width: 280px;
+  height: 280px;
+  right: -70px;
+  bottom: 8vh;
+  background: color-mix(in srgb, var(--secondary) 40%, transparent);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.2px;
+}
+
+.app-container {
+  min-height: 100vh;
+  padding: 24px 20px 118px;
+  box-sizing: border-box;
+}
+
 .glass {
   background: var(--card-bg);
+  border: 1px solid var(--border-color);
   backdrop-filter: var(--glass-blur);
   border-radius: var(--radius);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 760px) {
+  .app-container {
+    padding: 14px 12px 118px;
+  }
 }

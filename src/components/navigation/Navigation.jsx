@@ -1,6 +1,6 @@
 import "./Navigation.css";
 
-export default function Navigation({ activeTab, setActiveTab }) {
+export default function Navigation({ activeTab, setActiveTab, theme, onToggleTheme }) {
   const tabs = [
     { id: "focus", label: "Focus" },
     { id: "games", label: "Games" },
@@ -18,6 +18,15 @@ export default function Navigation({ activeTab, setActiveTab }) {
           {tab.label}
         </button>
       ))}
+
+      <button
+        className="theme-toggle"
+        onClick={onToggleTheme}
+        aria-label="Toggle color theme"
+        title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      >
+        {theme === "light" ? "Dark" : "Light"}
+      </button>
     </nav>
   );
 }

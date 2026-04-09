@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const symbols = ["🍎", "🌸", "⭐", "🍀", "🎵", "💜"];
 
 function MemoryGame() {
-  const [cards, setCards] = useState(() => {
+  const [cards] = useState(() => {
     return [...symbols, ...symbols]
       .sort(() => Math.random() - 0.5)
       .map((item, index) => ({ id: index, value: item }));

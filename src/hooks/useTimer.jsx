@@ -9,7 +9,14 @@ export default function useTimer(initialTime) {
 
     if (isRunning) {
       interval = setInterval(() => {
-        setTime((prev) => prev - 1);
+        setTime((prev) => {
+          if (prev <= 1) {
+            setIsRunning(false);
+            return 0;
+          }
+
+          return prev - 1;
+        });
       }, 1000);
     }
 

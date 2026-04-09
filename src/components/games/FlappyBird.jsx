@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const GAME_HEIGHT = 500;
 const GAME_WIDTH = 520;
@@ -17,7 +17,7 @@ export default function FlappyBird() {
   const gameRef = useRef();
 
   // START GAME
-  const startGame = () => {
+  const startGame = useCallback(() => {
     setBirdY(200);
     setVelocity(0);
     setPipes([
@@ -26,13 +26,13 @@ export default function FlappyBird() {
     ]);
     setScore(0);
     setRunning(true);
-  };
+  }, []);
 
   // JUMP
-  const jump = () => {
+  const jump = useCallback(() => {
     if (!running) return;
     setVelocity(JUMP);
-  };
+  }, [running]);
 
   // GAME LOOP
   useEffect(() => {
@@ -101,7 +101,7 @@ export default function FlappyBird() {
 
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [running]);
+  }, [running, startGame, jump]);
 
   return (
     <div

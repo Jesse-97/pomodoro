@@ -1,13 +1,59 @@
-:root {
-  --primary: #8b5cf6;
-  --secondary: #c4b5fd;
-  --bg-gradient: linear-gradient(135deg, #f1f8f0, #fce7f3, #f1f8f0);
-  
-  --card-bg: rgba(255, 255, 255, 0.4);
-  --glass-blur: blur(12px);
+:root,
+[data-theme="light"] {
+  --font-body: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+  --font-heading: "Fraunces", "Georgia", serif;
 
-  --text-dark: #2e1065;
-  --text-light: #6b7280;
+  --primary: #ff6b3d;
+  --primary-strong: #d84d21;
+  --secondary: #09b89b;
+  --accent: #f4c43b;
+
+  --bg-base: #f4f8ee;
+  --bg-gradient: radial-gradient(circle at 15% 15%, #fff7df 0%, transparent 42%),
+    radial-gradient(circle at 85% 18%, #d7f5ff 0%, transparent 36%),
+    linear-gradient(160deg, #edf6ea 0%, #eaf7f5 45%, #fdf5eb 100%);
+
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --card-bg: var(--surface);
+  --glass-blur: blur(14px);
+
+  --text-dark: #1d2a2a;
+  --text-light: #4e6462;
+  --muted: #728786;
+
+  --border-color: rgba(29, 42, 42, 0.12);
+  --ring-bg: #d9e8e4;
+  --shadow-lg: 0 20px 45px rgba(40, 59, 57, 0.14);
+  --shadow-md: 0 10px 28px rgba(37, 52, 50, 0.12);
+  --shadow-sm: 0 4px 14px rgba(44, 60, 57, 0.1);
 
   --radius: 20px;
+  --radius-sm: 12px;
+}
+
+[data-theme="dark"] {
+  --primary: #ff8f5a;
+  --primary-strong: #ff7438;
+  --secondary: #37d9c0;
+  --accent: #ffd36f;
+
+  --bg-base: #111717;
+  --bg-gradient: radial-gradient(circle at 15% 15%, rgba(255, 143, 90, 0.16) 0%, transparent 40%),
+    radial-gradient(circle at 85% 18%, rgba(55, 217, 192, 0.18) 0%, transparent 42%),
+    linear-gradient(165deg, #0f1517 0%, #111d1c 44%, #171616 100%);
+
+  --surface: rgba(21, 31, 31, 0.74);
+  --surface-strong: rgba(23, 34, 35, 0.9);
+  --card-bg: var(--surface);
+
+  --text-dark: #e9f1ef;
+  --text-light: #a2bab8;
+  --muted: #839998;
+
+  --border-color: rgba(233, 241, 239, 0.14);
+  --ring-bg: #2f4040;
+  --shadow-lg: 0 22px 48px rgba(0, 0, 0, 0.38);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.28);
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.26);
 }
